@@ -1,0 +1,15 @@
+#
+# Common:
+#
+.*
+!.gitignore
+*.lock
+
+
+
+#
+# Client:
+#
+!.eslintrc.cjs
+client/dist
+client/node_modules
