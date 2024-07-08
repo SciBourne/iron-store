@@ -1,0 +1,18 @@
+@import "variables.css";
+@import "base.css";
+
+@import "header.css";
+@import "footer.css";
+@import "main.css";
+
+@import "banners.css";
+@import "price-box.css";
+@import "buttons.css";
+@import "product-card.css";
+@import "paginator.css";
+@import "error-pages.css";
+@import "product-page.css";
+@import "product-list.css";
+@import "side-navigator.css";
+@import "last-visited.css";
+@import "category-menu.css";
