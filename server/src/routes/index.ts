@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 import { router as RootRouter } from './api/root'
 import { router as CatalogRouter } from './api/catalog'
-import { parseQuery } from '../middlewares.ts'
+import { parseQuery } from '../middlewares'
 
 
 

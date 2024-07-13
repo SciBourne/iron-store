@@ -2,7 +2,7 @@ import express from "express"
 import { Express } from "express"
 
 import router from "./routes"
-import { parseQuery } from "./middlewares.ts";
+import { parseQuery } from "./middlewares";
 
 
 
