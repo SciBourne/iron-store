@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { ROOT_PRODUCT_IMAGE as ROOT_IMG } from "../../config"
-import { Product } from "../../entities"
+import { Product } from "../../models"
 
 import { PriceBox } from ".."
 

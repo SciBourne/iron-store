@@ -1,7 +1,7 @@
 import { useOutletContext, useParams } from "react-router-dom"
 import { useEffect } from "react"
 
-import { video } from "../../entities/products"
+import { video } from "../../models/products"
 
 import {
   ProductBalance,

@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom"
-import { CategoryNames } from "../../../entities"
+import { CategoryNames } from "../../../models"
 import { useEffect, useState } from "react"
 
 

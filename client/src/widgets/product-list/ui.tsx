@@ -1,9 +1,9 @@
 import { Outlet, useOutletContext, useParams } from "react-router-dom"
-import { CategoryNames, Product } from "../../entities"
+import { CategoryNames, Product } from "../../models"
 import { PageNotFound, ProductsNotFound } from "../errors"
 import { useState } from "react"
 import { Paginator, ProductCard } from "../../shared"
-import { video } from "../../entities/products"
+import { video } from "../../models/products"
 
 
 

@@ -1,2 +1,2 @@
-import LastVisited from "./ui.tsx"
-export default LastVisited
+import RecomendedList from "./ui.tsx"
+export default RecomendedList

@@ -1,6 +1,6 @@
 import { MainBanner } from "../../widgets/banner"
 import MainCategoryMenu from "../../widgets/navigator/category-menu"
-import LastVisited from "../../widgets/last-visited"
+import RecomendedList from "../../widgets/last-visited"
 
 
 
@@ -11,7 +11,7 @@ function MainPage(): JSX.Element {
       <main>
         <MainBanner />
         <MainCategoryMenu />
-        <LastVisited />
+        <RecomendedList />
       </main>
     </>
   )

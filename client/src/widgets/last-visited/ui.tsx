@@ -1,14 +1,14 @@
-import { Product, video } from "../../entities/products"
+import { Product, video } from "../../models/products"
 import { PriceBox, ProductImage } from "../../shared"
 
 
 
 
-function LastVisited(): JSX.Element {
+function RecomendedList(): JSX.Element {
   return (
-    <section className="content last-visited">
-      <h2>Недавно смотрели</h2>
-      <div className="last-visited-grid">
+    <section className="content recomended-list">
+      <h2>Рекомендуемое</h2>
+      <div className="recomended-list-grid">
         {
           video.slice(0, 6).map(
             (product: Product) => (
@@ -34,4 +34,4 @@ function LastVisited(): JSX.Element {
 
 
 
-export default LastVisited
+export default RecomendedList
