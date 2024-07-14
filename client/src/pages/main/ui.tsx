@@ -1,6 +1,6 @@
 import { MainBanner } from "../../widgets/banner"
 import MainCategoryMenu from "../../widgets/navigator/category-menu"
-import RecomendedList from "../../widgets/last-visited"
+import RecomendedList from "../../widgets/recomended-list"
 
 
 

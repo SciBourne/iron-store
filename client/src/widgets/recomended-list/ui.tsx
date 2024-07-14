@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Product } from "../../models/products"
-import { PriceBox, ProductImage } from "../../shared"
+import { PriceBox, ProductImage, ProductLabel } from "../../shared"
 import { catalog } from "../../services"
 
 
@@ -30,7 +30,9 @@ function RecomendedList(): JSX.Element {
                   <PriceBox theme="dark-popup"
                             price={ product.price } />
 
-                  <p className="description"> { product.shortDescription } </p>
+                  <span className="head">
+                    { product.vendor } {product.model}
+                  </span>
                 </article>
               )
             )

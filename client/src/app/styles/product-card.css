@@ -104,7 +104,7 @@
   transition: all 0.5s;
 }
 
-.product-mini > .description {
+.product-mini > .head {
   padding: 0 1vw;
   height: 6vw;
 }
