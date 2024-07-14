@@ -102,10 +102,25 @@
 
   border-radius: 0.5vw;
   transition: all 0.5s;
+}
 
-  > .description {
-    padding: 0 1vw;
-    height: 6vw;
+.product-mini > .description {
+  padding: 0 1vw;
+  height: 6vw;
+}
+
+.product-mini .product-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  img {
+    width: 60%;
+    height: auto;
   }
 }
 

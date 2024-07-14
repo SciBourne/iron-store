@@ -1,28 +1,38 @@
-import { Product, video } from "../../models/products"
+import { useEffect, useState } from "react"
+import { Product } from "../../models/products"
 import { PriceBox, ProductImage } from "../../shared"
+import { catalog } from "../../services"
 
 
 
 
 function RecomendedList(): JSX.Element {
+  const [products, setProducts] = useState<Product[]>()
+
+  useEffect(
+    () => catalog.updateRecomendedList(setProducts)
+  )
+
   return (
     <section className="content recomended-list">
       <h2>Рекомендуемое</h2>
       <div className="recomended-list-grid">
         {
-          video.slice(0, 6).map(
-            (product: Product) => (
-              <article className="product-mini" key={ product.id }>
+          products && (
+            products.map(
+              (product: Product) => (
+                <article className="product-mini" key={ product._id }>
 
-                <ProductImage id={ product.id }
-                              category={ product.category }
-                              isLink={ true } />
+                  <ProductImage id={ product._id }
+                                category={ product.category }
+                                isLink={ true } />
 
-                <PriceBox theme="dark-popup"
-                          price={ product.price } />
+                  <PriceBox theme="dark-popup"
+                            price={ product.price } />
 
-                <p className="description"> { product.shortDescription } </p>
-              </article>
+                  <p className="description"> { product.shortDescription } </p>
+                </article>
+              )
             )
           )
         }

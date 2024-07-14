@@ -3,7 +3,6 @@ import { CategoryNames, Product } from "../../models"
 import { PageNotFound, ProductsNotFound } from "../errors"
 import { useState } from "react"
 import { Paginator, ProductCard } from "../../shared"
-import { video } from "../../models/products"
 
 
 

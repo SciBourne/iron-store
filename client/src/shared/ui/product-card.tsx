@@ -15,9 +15,10 @@ interface productImageProps {
 
 function ProductImage(props: productImageProps): JSX.Element {
   const image: JSX.Element = (
-    <img  className="product-image"
-          src={ `${ROOT_IMG}/${ props.category }/A-1.png` }
-          alt={ props.id } />
+    <div className="product-image">
+      <img src={ `${ROOT_IMG}/${ props.category }/${ props.id }.webp` }
+           alt={ props.id } />
+    </div>
   )
 
   if ( props.isLink ) {
@@ -125,7 +126,7 @@ function ProductInfo(props: productInfo): JSX.Element {
 function ProductCard(props: Product): JSX.Element {
   return (
     <article className="product">
-      <ProductImage id={ props.id }
+      <ProductImage id={ props._id }
                     category={ props.category }
                     isLink={ true } />
 
