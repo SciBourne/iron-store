@@ -63,9 +63,7 @@ function ProductsList(): JSX.Element {
     [ categoryName ]
   )
 
-  const amountProducts: number = products.length
-
-  if ( amountProducts === 0 ) {
+  if ( products.length === 0 ) {
     return <ProductsNotFound />
   }
 
@@ -76,7 +74,7 @@ function ProductsList(): JSX.Element {
       <ListContent products={ products }
                    startPage={ startPage } />
 
-      <Paginator  amountProducts={ amountProducts }
+      <Paginator  amountProducts={ products.length }
                   startPage={ startPage }
                   toggleStartPage={ setStartPage } />
 
