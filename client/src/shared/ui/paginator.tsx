@@ -1,4 +1,5 @@
 import { MouseEventHandler, useEffect, useState } from "react"
+import { Product } from "../../models"
 
 
 
@@ -104,14 +105,14 @@ function ArrowPageButton(props: arrowPageButtonProps): JSX.Element {
 
 
 interface paginatorProps {
-  amountProducts: number
+  products: Product[]
   startPage: number
   toggleStartPage: (page: number) => void
 }
 
 
 function Paginator(props: paginatorProps): JSX.Element {
-  const amountPages: number = Math.ceil(props.amountProducts / 4)
+  const amountPages: number = Math.ceil(props.products.length / 4)
   const pageButtons: JSX.Element[] = []
   let middleButton: JSX.Element
 
@@ -126,7 +127,7 @@ function Paginator(props: paginatorProps): JSX.Element {
       setAllowNext(props.startPage != (amountPages * 4) - 4)
     },
 
-    [ props.startPage ]
+    [ props.startPage, props.products ]
   )
 
   for (let page = 1, i = 0; page <= amountPages; page++, i = i + 4) {

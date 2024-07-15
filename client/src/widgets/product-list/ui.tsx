@@ -59,7 +59,11 @@ function ProductsList(): JSX.Element {
   const [products, setProducts] = useState<Product[]>([])
 
   useEffect(
-    () => catalog.updateProductList(categoryName, setProducts),
+    () => {
+      catalog.updateProductList(categoryName, setProducts),
+      setStartPage(0)
+    },
+
     [ categoryName ]
   )
 
@@ -74,7 +78,7 @@ function ProductsList(): JSX.Element {
       <ListContent products={ products }
                    startPage={ startPage } />
 
-      <Paginator  amountProducts={ products.length }
+      <Paginator  products={ products }
                   startPage={ startPage }
                   toggleStartPage={ setStartPage } />
 
