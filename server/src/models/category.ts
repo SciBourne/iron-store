@@ -5,7 +5,7 @@ enum CategoryName {
   motherboards  = "motherboards",
   powersupplies = "powersupplies",
   processors    = "processors",
-  storages      = "storage",
+  storages      = "storages",
   videocards    = "videocards"
 }
 
