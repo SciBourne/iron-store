@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { Product } from "../../models/products"
-import { PriceBox, ProductImage, ProductLabel } from "../../shared"
+import { PriceBox, ProductImage } from "../../shared"
 import { catalog } from "../../services"
 
 
@@ -10,7 +10,7 @@ function RecomendedList(): JSX.Element {
   const [products, setProducts] = useState<Product[]>()
 
   useEffect(
-    () => catalog.updateRecomendedList(setProducts)
+    () => catalog.updateRecomendedList(setProducts), []
   )
 
   return (
