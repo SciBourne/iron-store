@@ -1,49 +1,80 @@
 import { Outlet, useOutletContext, useParams } from "react-router-dom"
 import { CategoryNames, Product } from "../../models"
 import { PageNotFound, ProductsNotFound } from "../errors"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Paginator, ProductCard } from "../../shared"
+import { catalog } from "../../services"
+
+
+
+
+interface listHeaderProps {
+  category: string
+}
+
+
+function ListHeader(props: listHeaderProps): JSX.Element {
+  return (
+    <h2 className="category-name">
+      { CategoryNames.get(props.category) }
+    </h2>
+  )
+}
+
+
+
+
+interface generateProductListProps {
+  products: Product[]
+  startPage: number
+}
+
+
+function ListContent(props: generateProductListProps): JSX.Element {
+  return (
+    <div className="product-grid">
+      {
+        props.products.slice(props.startPage, props.startPage + 4).map(
+          (product: Product) => (
+            <ProductCard { ...product } key={ product._id } />
+          )
+        )
+      }
+    </div>
+  )
+}
 
 
 
 
 function ProductsList(): JSX.Element {
   const categoryName: string = useParams().categoryName as string
-  const [startPage, setStartPage] = useState(0)
+
   const [visibleProduct, setVisibleProduct] = useOutletContext<[boolean, Function]>()
+  const [startPage, setStartPage] = useState(0)
+  const [products, setProducts] = useState<Product[]>([])
 
   if ( !CategoryNames.has(categoryName) ) {
     return <PageNotFound />
   }
 
-  let products: Product[]
-
-  switch ( categoryName ) {
-    case "videocards":
-      products = video
-      break;
-
-    default:
-      return <ProductsNotFound />
-  }
+  useEffect(
+    () => catalog.updateProductList(categoryName, setProducts),
+    [ categoryName ]
+  )
 
   const amountProducts: number = products.length
 
+  if ( amountProducts === 0 ) {
+    return <ProductsNotFound />
+  }
+
   const result: JSX.Element = (
     <div className="product-list">
-      <h2 className="category-name">
-        { CategoryNames.get(categoryName) }
-      </h2>
+      <ListHeader category={ categoryName } />
 
-      <div className="product-grid">
-        {
-          products.slice(startPage, startPage + 4).map(
-            (product: Product) => (
-              <ProductCard { ...product } key={ product.id } />
-            )
-          )
-        }
-      </div>
+      <ListContent products={ products }
+                   startPage={ startPage } />
 
       <Paginator  amountProducts={ amountProducts }
                   startPage={ startPage }
