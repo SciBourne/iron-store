@@ -50,13 +50,13 @@ function ListContent(props: generateProductListProps): JSX.Element {
 function ProductsList(): JSX.Element {
   const categoryName: string = useParams().categoryName as string
 
-  const [visibleProduct, setVisibleProduct] = useOutletContext<[boolean, Function]>()
-  const [startPage, setStartPage] = useState(0)
-  const [products, setProducts] = useState<Product[]>([])
-
   if ( !CategoryNames.has(categoryName) ) {
     return <PageNotFound />
   }
+
+  const [visibleProduct, setVisibleProduct] = useOutletContext<[boolean, Function]>()
+  const [startPage, setStartPage] = useState(0)
+  const [products, setProducts] = useState<Product[]>([])
 
   useEffect(
     () => catalog.updateProductList(categoryName, setProducts),
