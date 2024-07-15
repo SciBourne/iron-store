@@ -14,7 +14,9 @@
   padding-left: 1vw;
   border-radius: 0.4vw;
 
-  width: 12vw;
+  max-width: 12vw;
+  min-width: 12vw;
+
   gap: 0.5vw;
 
   > .payload {
