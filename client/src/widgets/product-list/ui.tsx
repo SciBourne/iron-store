@@ -49,7 +49,7 @@ function ListContent(props: listContentProps): JSX.Element {
 
 function ProductsList(): JSX.Element {
   const categoryName: string = useParams().categoryName as string
-  console.log(categoryName)
+
   if ( !CategoryNames.has(categoryName) ) {
     return <PageNotFound />
   }

@@ -5,7 +5,7 @@ interface priceProps {
 function Price(props: priceProps): JSX.Element {
   return (
     <span className="price">
-      { props.value.toLocaleString("RU-ru") } ₽
+      { props.value ? props.value.toLocaleString("RU-ru") : "0" } ₽
     </span>
   )
 }

@@ -1,5 +1,5 @@
-import { useLocation, useOutletContext, useParams } from "react-router-dom"
-import { useEffect, useState } from "react"
+import { useOutletContext, useParams } from "react-router-dom"
+import { useEffect, useReducer } from "react"
 
 import {
   ProductBalance,
@@ -9,27 +9,32 @@ import {
   PriceBox
 } from "../../shared"
 
+import { catalog, reducers } from "../../services"
 import { Product } from "../../models"
-import { catalog } from "../../services"
-import { PageNotFound } from "../errors"
 
 
 
 
 function ProductDetails(): JSX.Element {
   const [_, setVisibleProduct] = useOutletContext<[boolean, Function]>()
-  const [product, setProduct] = useState<Product>({} as Product)
 
-  const path: string = useLocation().pathname
-  const ID = path.split("/")[2]
-  const category = path.split("/")[2]
+  const productState: reducers.InitialState = {
+    data: {} as Product,
+    loading: false,
+    error: null
+  }
+
+  const [state, updateState] = useReducer(reducers.reducer, productState)
+  const { data, loading, error } = state
 
   const params = useParams()
+  const category = params.categoryName as string
+  const id = params.productID as string
 
   useEffect(
     () => {
-      catalog.getProduct(category, ID, setProduct)
       setVisibleProduct(true)
+      catalog.updateProduct(category, id, updateState)
 
       return () => setVisibleProduct(false)
     },
@@ -37,25 +42,25 @@ function ProductDetails(): JSX.Element {
     []
   )
 
-  const result: JSX.Element = (
-    <div className="product-page">
-      <ProductImage id={params.productID as string}
-                    category={ params.categoryName as string} />
-      <div className="info">
-        <ProductLabel vendor={ product.vendor }
-                      model={ product.model } />
-        <ProductDescription style="short" content={ product.shortDescription } />
-        <PriceBox theme="dark" price={ product.price } />
-        <ProductBalance balance={ product.balance } />
-        <ProductDescription content={ product.description } />
-      </div>
-    </div>
-  )
-
   return (
-    <>
-      { product ? result : <PageNotFound /> }
-    </>
+    <div className="product-page">
+      <ProductImage id={ id } category={ category } />
+      {
+        loading
+            ? <h2>Loading...</h2>
+            : error
+                ? <p>{ error }</p>
+                : (
+                    <div className="info">
+                      <ProductLabel vendor={ data.vendor } model={ data.model } />
+                      <ProductDescription style="short" content={ data.shortDescription } />
+                      <PriceBox theme="dark" price={ data.price } />
+                      <ProductBalance balance={ data.balance } />
+                      <ProductDescription content={ data.description } />
+                    </div>
+                  )
+        }
+    </div>
   )
 }
 

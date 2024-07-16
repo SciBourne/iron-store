@@ -10,8 +10,13 @@
 
 
 .product-page > .product-image {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
   width: 40vw;
-  height: auto;
+  height: 40vw;
 
   border: 0.1vw solid var(--border-color);
   border-radius: 0.4vw;

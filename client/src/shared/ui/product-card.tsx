@@ -61,29 +61,31 @@ interface productDescriptionProps {
 function ProductDescription(props: productDescriptionProps): JSX.Element {
   let textStyle: string
   let header: undefined | JSX.Element
-  let content: string | JSX.Element[]
+  let content: JSX.Element | JSX.Element[]
 
   switch (props.style) {
     case "short":
       textStyle = "short-description"
-      content = props.content
+      content = <p>{ props.content }</p>
       break;
 
     default:
       textStyle = "description"
       header = <h2>Описание</h2>
       content = props.content
-                       .split('\n')
-                       .map( (line, index) => <p key={ index }>{ line }</p>)
+                        ? props.content
+                                  .split('\n')
+                                  .map( (line, index) => <p key={ index }>{ line }</p>)
+                        : <p>...</p>
       break;
   }
 
   return (
     <>
       { header }
-      <p className={ textStyle }>
+      <div className={ textStyle }>
         { content }
-      </p>
+      </div>
     </>
   )
 }
