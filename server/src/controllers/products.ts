@@ -6,6 +6,20 @@ import { catalog } from "../services"
 
 
 
+async function getProduct(req: Request, res: Response) {
+  const id: string = req.params.productID
+
+  const category: CategoryName = CategoryName[
+    req.params.categoryName as keyof typeof CategoryName
+  ]
+
+  res.status(200).json(
+    await catalog.getProduct(category, id)
+  )
+}
+
+
+
 
 async function getProducts(req: Request, res: Response) {
   const fieldsConfig: VisibilityMask = req.query
@@ -22,4 +36,4 @@ async function getProducts(req: Request, res: Response) {
 
 
 
-export default getProducts
+export { getProduct, getProducts }

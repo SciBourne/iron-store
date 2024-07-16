@@ -16,6 +16,19 @@ const categories: CategoryName[] = Object.values(CategoryName)
 
 
 
+async function getProduct(category: CategoryName, id: string): Promise<Product | null> {
+  return db.get().collection<Product>("products")
+                    .findOne<Product>(
+                      {
+                        category: category,
+                        _id: new ObjectId(id)
+                      }
+                    )
+}
+
+
+
+
 async function getProducts(name: CategoryName,
                            fields?: VisibilityMask): Promise<Product[]> {
 
@@ -53,4 +66,10 @@ async function getRecomended(fields?: VisibilityMask): Promise<Product[]> {
 
 
 
-export { categories, getProducts, getRecomended }
+export {
+  categories,
+
+  getProducts,
+  getRecomended,
+  getProduct
+}

@@ -1,7 +1,7 @@
 import getServerStatus from "./root"
 
 import getCatalog from "./catalog"
-import getProducts from "./products"
+import { getProduct, getProducts } from "./products"
 import { getRecomended } from "./recomended"
 
 
@@ -12,5 +12,6 @@ export {
 
   getCatalog,
   getProducts,
-  getRecomended
+  getRecomended,
+  getProduct
 }
