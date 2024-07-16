@@ -24,13 +24,13 @@ function ListHeader(props: listHeaderProps): JSX.Element {
 
 
 
-interface generateProductListProps {
+interface listContentProps {
   products: Product[]
   startPage: number
 }
 
 
-function ListContent(props: generateProductListProps): JSX.Element {
+function ListContent(props: listContentProps): JSX.Element {
   return (
     <div className="product-grid">
       {
@@ -49,7 +49,7 @@ function ListContent(props: generateProductListProps): JSX.Element {
 
 function ProductsList(): JSX.Element {
   const categoryName: string = useParams().categoryName as string
-
+  console.log(categoryName)
   if ( !CategoryNames.has(categoryName) ) {
     return <PageNotFound />
   }
