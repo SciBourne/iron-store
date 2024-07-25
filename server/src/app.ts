@@ -1,9 +1,11 @@
 import express from "express"
 import { Express } from "express"
+import cookieParser from "cookie-parser";
 
 import router from "./routes"
 import { parseQuery } from "./middlewares";
 import { setCORS } from "./middlewares";
+import { authUser } from "./middlewares/auth/auth";
 
 
 
@@ -11,6 +13,8 @@ import { setCORS } from "./middlewares";
 const app: Express = express();
 
 app.use(setCORS)
+app.use(cookieParser())
+app.use(authUser)
 app.use(parseQuery)
 
 app.use("/api/v1", router)

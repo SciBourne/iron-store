@@ -12,4 +12,4 @@ enum CategoryName {
 
 
 
-export default CategoryName
+export { CategoryName }

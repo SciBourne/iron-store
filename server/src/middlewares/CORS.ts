@@ -15,6 +15,11 @@ function setCORS(_: Request, res: Response, next: NextFunction) {
     "Origin, X-Requested-With, Content-Type, Accept"
   )
 
+  res.header(
+    "Access-Control-Allow-Credentials",
+    "true"
+  )
+
   next()
 }
 

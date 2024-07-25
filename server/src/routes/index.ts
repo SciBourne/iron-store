@@ -2,7 +2,7 @@ import { Router } from 'express'
 
 import { router as RootRouter } from './api/root'
 import { router as CatalogRouter } from './api/catalog'
-import { parseQuery } from '../middlewares'
+import { router as CartRouter } from './api/cart'
 
 
 
@@ -10,8 +10,9 @@ import { parseQuery } from '../middlewares'
 const router = Router()
 
 
-router.use("/", RootRouter)
+router.use("/",        RootRouter)
 router.use("/catalog", CatalogRouter)
+router.use("/cart",    CartRouter)
 
 
 
