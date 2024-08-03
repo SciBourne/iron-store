@@ -31,8 +31,8 @@ function authUser(req: Request, res: Response, next: NextFunction) {
           }
         )
         .catch(
-          (err) => {
-            console.log(err)
+          (err: Error) => {
+            console.log(err.message)
           }
         )
 
@@ -46,7 +46,7 @@ function authUser(req: Request, res: Response, next: NextFunction) {
       res.cookie(TokenName.ACCESS, data.accessToken, cookieOptions)
       res.cookie(TokenName.REFRESH, data.refreshToken, cookieOptions)
 
-      next()
+      res.redirect(req.url)
     }
   )
 }

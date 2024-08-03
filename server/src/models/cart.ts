@@ -1,20 +1,39 @@
 import { ObjectId } from "mongodb"
+import { Product } from "./product"
 
 
 
 
 interface CartItem {
-  productID: ObjectId,
-  amount: number
+  _id: ObjectId
+  qty: number
+
 }
 
 
 interface Cart {
-  sessionID: string
-  products: CartItem[]
+  _id: ObjectId
+  content: CartItem[]
+}
+
+
+interface CartItemDetails extends Product {
+  qty: number
+}
+
+
+interface AggData {
+  cart: Cart
+  products: Product[]
 }
 
 
 
+export {
 
-export { CartItem, Cart }
+  Cart,
+  CartItem,
+  CartItemDetails,
+  AggData
+
+}
