@@ -5,6 +5,8 @@
   --font-color-bright: #FFFFFF;
   --font-color-dark: #000000;
   --font-color-active: #83CAF6;
+  --font-color-disabled: #a1d32c;
+  --font-color-cart-info: #FF7222;
 
   --bg-color-main: #FFFFFF;
   --bg-color-dark: linear-gradient(0deg, #343434 0%, #505050 100%);
@@ -13,6 +15,7 @@
   --button-color-store: linear-gradient(180deg, #FFA132 0%, #99601E 100%);
   --button-color-store--hover: linear-gradient(180deg, #FF7222 0%, #99591E 100%);
   --button-color-store--active: linear-gradient(180deg, #DA6320 0%, #844C18 100%);
+  --button-color-store--disabled: linear-gradient(180deg, #dff0ba 0%, #a1d32c 100%);
   --button-color-store--only-content: orange;
 
   --border-color: #e7e7e7;

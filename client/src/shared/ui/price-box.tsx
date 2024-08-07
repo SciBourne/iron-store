@@ -1,3 +1,13 @@
+import { observer } from "mobx-react"
+
+import { handleClickButton } from "../handlers/price-box"
+import { useContext } from "react"
+import { Context } from "../../context"
+import { Product } from "../../models"
+
+
+
+
 interface priceProps {
   value: number
 }
@@ -12,6 +22,7 @@ function Price(props: priceProps): JSX.Element {
 
 
 
+
 function CartIcon(): JSX.Element {
   return (
     <img className="cart-icon"
@@ -21,38 +32,40 @@ function CartIcon(): JSX.Element {
 }
 
 
+const ButtonStore = observer(
+  (props: { product: Product }): JSX.Element => {
+    const cart = useContext(Context)?.cart
 
-interface buttonStoreProps {
-  content: string
-}
+    const activeContent = "В КОРЗИНУ"
+    const disabledContent = "ДОБАВЛЕНО"
 
-function ButtonStore(props: buttonStoreProps): JSX.Element {
-  return (
-    <button className="button-store" type="button" >
-      { props.content }
-    </button>
-  )
-}
+    return (
+      <button onClick={ handleClickButton(props.product, cart) }
+              disabled={ cart?.getItem(props.product._id) ? true : false }
+              className="button-store"
+              type="button">
+
+        { cart?.getItem(props.product._id) ? disabledContent : activeContent }
+
+      </button>
+    )
+  }
+)
 
 
 
-interface priceBoxProps {
-  price: number
-  theme?: string
-}
 
-function PriceBox(props: priceBoxProps): JSX.Element {
+function PriceBox(props: { product: Product, theme?: string }): JSX.Element {
   const theme: string = props.theme ? "-" + props.theme : ""
 
   let containerStyle: string = "price-box" + theme
-  let buttonContent: string = "В КОРЗИНУ"
   let payloadContent: JSX.Element
 
   switch ( props.theme ) {
     case "dark":
       payloadContent = (
         <>
-          <Price value={ props.price } />
+          <Price value={ props.product.price } />
           <CartIcon />
         </>
       )
@@ -62,7 +75,7 @@ function PriceBox(props: priceBoxProps): JSX.Element {
     case "dark-popup":
       payloadContent = (
         <>
-          <Price value={ props.price } />
+          <Price value={ props.product.price } />
           <CartIcon />
         </>
       )
@@ -73,7 +86,7 @@ function PriceBox(props: priceBoxProps): JSX.Element {
       payloadContent = (
         <>
           <CartIcon />
-          <Price value={ props.price } />
+          <Price value={ props.product.price } />
         </>
       )
 
@@ -85,7 +98,7 @@ function PriceBox(props: priceBoxProps): JSX.Element {
       <div className="payload">
         { payloadContent }
       </div>
-      <ButtonStore content={ buttonContent } />
+      <ButtonStore product={ props.product } />
     </form>
   )
 }

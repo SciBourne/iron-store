@@ -49,6 +49,17 @@ header > .content {
 }
 
 
+.top-menu .cart-info-number {
+  color: var(--font-color-cart-info);
+}
+
+
+.top-menu .cart-info-text {
+  color: var(--font-color-bright);
+  padding: 0 0.3vw;
+}
+
+
 .logo-s {
   width: 212px;
   height: 40px;

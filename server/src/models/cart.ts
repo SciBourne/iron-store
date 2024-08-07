@@ -22,9 +22,8 @@ interface CartItemDetails extends Product {
 }
 
 
-interface AggData {
-  cart: Cart
-  products: Product[]
+interface AggData extends Cart {
+  details: Product[]
 }
 
 

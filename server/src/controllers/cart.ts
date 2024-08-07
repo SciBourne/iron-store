@@ -2,8 +2,7 @@ import { Request, Response } from "express"
 import * as jwt from "jsonwebtoken"
 
 import { cart } from "../services"
-import { ObjectId } from "mongodb"
-import { CartItem, CartItemDetails } from "../models/cart"
+import { CartItemDetails } from "../models/cart"
 
 
 
@@ -26,15 +25,13 @@ async function getCart(req: Request, res: Response) {
 
 
 async function getCartItem(req: Request, res: Response) {
-  const productID = new ObjectId(req.params.productID)
-
   const decodedToken = jwt.decode(
     req.cookies.ACCESS_TOKEN,
     { json: true }
   )
 
   if (decodedToken) {
-    cart.getCartItem(decodedToken.userID, productID)
+    cart.getCartItem(decodedToken.userID, req.params.productID)
           .then(
             (item) => {
               if (item) {
@@ -56,14 +53,12 @@ async function addToCart(req: Request, res: Response) {
     { json: true }
   )
 
-  const item: CartItemDetails = req.body
-
   if (decodedToken) {
-    cart.addToCart(decodedToken.userID, item)
+    cart.addToCart(decodedToken.userID, req.body)
           .then(
             (status) => {
               if (status) {
-                res.setHeader("location", `/cart/${item._id}`)
+                res.setHeader("location", `/cart/${req.body._id}`)
                       .status(201)
                       .send()
               }
@@ -76,15 +71,13 @@ async function addToCart(req: Request, res: Response) {
 
 
 async function remFromCart(req: Request, res: Response) {
-  const productID = new ObjectId(req.params.productID)
-
   const decodedToken = jwt.decode(
     req.cookies.ACCESS_TOKEN,
     { json: true }
   )
 
   if (decodedToken) {
-    cart.remFromCart(decodedToken.userID, productID)
+    cart.remFromCart(decodedToken.userID, req.params.productID)
           .then(
             (status) => {
               if (status) {
@@ -99,15 +92,13 @@ async function remFromCart(req: Request, res: Response) {
 
 
 async function updateQty(req: Request, res: Response) {
-  const productID = new ObjectId(req.params.productID)
-
   const decodedToken = jwt.decode(
     req.cookies.ACCESS_TOKEN,
     { json: true }
   )
 
   if (decodedToken) {
-    cart.updateQty(decodedToken.userID, productID, req.body.qty)
+    cart.updateQty(decodedToken.userID, req.params.productID, req.body.qty)
           .then(
             (status) => {
               if (status) {

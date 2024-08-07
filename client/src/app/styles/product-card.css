@@ -14,7 +14,10 @@
 
   transition: all 0.5s;
 
-
+  > .price-box > .button-store:disabled {
+    border: 1px solid var(--font-color-disabled);
+    color: var(--font-color-disabled)
+  }
 }
 
 .product:hover {
@@ -24,6 +27,13 @@
     background: var(--button-color-store);
     color: var(--font-color-bright);
     border: none;
+
+    &:disabled {
+      background: var(--button-color-store--disabled);
+      color: var(--font-color-bright);
+
+      cursor: default;
+    }
   }
 }
 

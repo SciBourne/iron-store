@@ -1,9 +1,10 @@
-/* import React from 'react' */
 import ReactDOM from 'react-dom/client'
 import { RouterProvider } from "react-router-dom"
 
+import { Context, stores } from '../context'
+
+import router from "./router"
 import "./styles/index.css"
-import router from "./router.tsx"
 
 
 
@@ -13,13 +14,11 @@ const root = ReactDOM.createRoot(
 )
 
 
-/* root.render(
-  <React.StrictMode>
-    <RouterProvider router={ router } />
-  </React.StrictMode>
-) */
+
 
 
 root.render(
-  <RouterProvider router={ router } />
+  <Context.Provider value={ stores }>
+    <RouterProvider router={ router } />
+  </Context.Provider>
 )

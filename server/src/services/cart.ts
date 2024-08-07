@@ -7,13 +7,13 @@ import { Product } from "../models"
 
 
 
-async function getCart(userID: ObjectId): Promise<CartItemDetails[]> {
+async function getCart(userID: string): Promise<CartItemDetails[]> {
   const result: CartItemDetails[] = []
 
   const pipeline = [
     {
       $match: {
-        _id: userID
+        _id: new ObjectId(userID)
       }
     },
 
@@ -22,7 +22,7 @@ async function getCart(userID: ObjectId): Promise<CartItemDetails[]> {
         from: "products",
         localField: "content._id",
         foreignField: "_id",
-        as: "data"
+        as: "details"
       }
     }
   ]
@@ -32,9 +32,9 @@ async function getCart(userID: ObjectId): Promise<CartItemDetails[]> {
                                   .next()
 
   if (aggData) {
-    aggData.cart.content.forEach(
+    aggData.content.forEach(
       (item: CartItem) => {
-        let product = aggData.products.find(
+        let product = aggData.details.find(
           (product: Product) => item._id.equals(product._id)
         )
 
@@ -54,17 +54,11 @@ async function getCart(userID: ObjectId): Promise<CartItemDetails[]> {
 
 
 
-async function getCartItem(
-
-  userID: ObjectId,
-  productID: ObjectId
-
-): Promise<CartItemDetails | null> {
-
+async function getCartItem(userID: string, productID: string): Promise<CartItemDetails | null> {
   const pipeline = [
     {
       $match: {
-        _id: userID
+        _id: new ObjectId(userID)
       }
     },
 
@@ -81,7 +75,7 @@ async function getCartItem(
             cond: {
               $eq: [
                 "$$item._id",
-                productID
+                new ObjectId(productID)
               ]
             }
 
@@ -126,20 +120,17 @@ async function getCartItem(
 
 
 
-async function addToCart(
-
-  userID: ObjectId,
-  item: CartItem
-
-): Promise<boolean> {
-
+async function addToCart(userID: string, item: CartItem): Promise<boolean> {
   const findParams = {
-    _id: userID
+    _id: new ObjectId(userID)
   }
 
   const updateParams = {
     $push: {
-      content: item
+      content: {
+        _id: new ObjectId(item._id),
+        qty: item.qty
+      }
     }
   }
 
@@ -161,21 +152,15 @@ async function addToCart(
 
 
 
-async function remFromCart(
-
-  userID: ObjectId,
-  productID: ObjectId
-
-): Promise<boolean> {
-
+async function remFromCart(userID: string, productID: string): Promise<boolean> {
   const findParams = {
-    _id: userID
+    _id: new ObjectId(userID)
   }
 
   const updateParams = {
     $pull: {
       content: {
-        _id: productID
+        _id: new ObjectId(productID)
       }
     }
   }
@@ -192,16 +177,9 @@ async function remFromCart(
 
 
 
-async function updateQty(
-
-  userID: ObjectId,
-  productID: ObjectId,
-  newQty: number
-
-): Promise<boolean> {
-
+async function updateQty(userID: string, productID: string, newQty: number): Promise<boolean> {
   const findParams = {
-    _id: userID
+    _id: new ObjectId(userID)
   }
 
   const updateParams = {
@@ -213,13 +191,17 @@ async function updateQty(
   const options = {
     arrayFilters: [
       {
-        "product._id": productID
+        "product._id": new ObjectId(productID)
       }
     ]
   }
 
   const result = await db.get().collection("carts")
-                                  .updateOne(findParams, updateParams, options)
+                                  .updateOne(
+                                    findParams,
+                                    updateParams,
+                                    options
+                                  )
 
   return result.acknowledged
 }
@@ -228,11 +210,9 @@ async function updateQty(
 
 
 export {
-
   getCart,
   getCartItem,
   addToCart,
   remFromCart,
   updateQty
-
 }

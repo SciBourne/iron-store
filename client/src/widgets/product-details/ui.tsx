@@ -54,7 +54,7 @@ function ProductDetails(): JSX.Element {
                     <div className="info">
                       <ProductLabel vendor={ data.vendor } model={ data.model } />
                       <ProductDescription style="short" content={ data.shortDescription } />
-                      <PriceBox theme="dark" price={ data.price } />
+                      <PriceBox theme="dark" product={ data } />
                       <ProductBalance balance={ data.balance } />
                       <ProductDescription content={ data.description } />
                     </div>

@@ -10,17 +10,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@types/node": "^20.14.10",
+    "@babel/core": "^7.24.9",
+    "@babel/plugin-proposal-decorators": "^7.24.7",
+    "@swc/core": "^1.7.2",
     "axios": "^1.7.2",
-    "dotenv": "^16.4.5",
+    "babel": "^6.23.0",
+    "mobx": "^6.13.1",
+    "mobx-react": "^9.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-paginate": "^8.2.0",
     "react-router-dom": "^6.23.1",
     "react-transition-group": "^4.4.5",
-    "tsc": "^2.0.4"
+    "tsc": "^2.0.4",
+    "unplugin-swc": "^1.5.1"
   },
   "devDependencies": {
+    "@types/node": "^20.14.10",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@typescript-eslint/eslint-plugin": "^7.2.0",

@@ -55,6 +55,19 @@
   &:active::after {
     opacity: 1;
   }
+
+  &:disabled {
+    background: var(--button-color-store--disabled);
+    color: var(--font-color-bright);
+
+    cursor: default;
+
+    &::after, &::before, &:hover::before {
+      background: inherit;
+      color: inherit;
+      cursor: inherit;
+    }
+  }
 }
 
 

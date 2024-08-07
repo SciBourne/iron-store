@@ -137,7 +137,7 @@ function ProductCard(props: Product): JSX.Element {
                     balance={ props.balance }
                     shortDescription={ props.shortDescription } />
 
-      <PriceBox price={ props.price } />
+      <PriceBox product={ props } />
     </article>
   )
 }

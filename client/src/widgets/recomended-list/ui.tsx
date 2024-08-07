@@ -28,7 +28,7 @@ function RecomendedList(): JSX.Element {
                                 isLink={ true } />
 
                   <PriceBox theme="dark-popup"
-                            price={ product.price } />
+                            product={ product } />
 
                   <span className="head">
                     { product.vendor } {product.model}
