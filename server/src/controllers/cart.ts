@@ -2,7 +2,6 @@ import { Request, Response } from "express"
 import * as jwt from "jsonwebtoken"
 
 import { cart } from "../services"
-import { CartItemDetails } from "../models/cart"
 
 
 
@@ -96,7 +95,6 @@ async function updateQty(req: Request, res: Response) {
     req.cookies.ACCESS_TOKEN,
     { json: true }
   )
-
   if (decodedToken) {
     cart.updateQty(decodedToken.userID, req.params.productID, req.body.qty)
           .then(

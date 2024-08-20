@@ -5,20 +5,23 @@ import { getProduct, getProducts } from "./products"
 import { getRecomended } from "./recomended"
 
 import {
-
   getCart,
   getCartItem,
   addToCart,
   remFromCart,
   updateQty
-
 } from "./cart"
+
+import {
+  getOrderHistory,
+  createOrder,
+  cancelOrder
+} from "./orders"
 
 
 
 
 export {
-
   getServerStatus,
 
   getCatalog,
@@ -30,6 +33,9 @@ export {
   getCartItem,
   addToCart,
   remFromCart,
-  updateQty
+  updateQty,
 
+  getOrderHistory,
+  createOrder,
+  cancelOrder
 }

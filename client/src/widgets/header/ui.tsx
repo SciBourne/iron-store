@@ -21,6 +21,17 @@ function CartLink(): JSX.Element {
 
 
 
+function ProfileLink(): JSX.Element {
+  return (
+    <NavLink to="/profile">
+      <img src="/img/user-profile.svg" alt="Профиль пользователя" />
+    </NavLink>
+  )
+}
+
+
+
+
 const CartInfo = observer(
   (): JSX.Element | null => {
     const stores = useContext(Context)
@@ -73,13 +84,8 @@ function CartBlock(): JSX.Element {
 function TopMenu(): JSX.Element{
   return (
     <div className="top-menu">
-
-      <NavLink to="/profile">
-        <img src="/img/user-profile.svg" alt="Профиль пользователя" />
-      </NavLink>
-
+      <ProfileLink />
       <CartBlock />
-
     </div>
   )
 }

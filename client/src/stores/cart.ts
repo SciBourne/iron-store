@@ -13,11 +13,11 @@ class CartStore {
     setTimeout(
       () => {
         cart.getCart()
-              .then(
-                (cart) => {
-                  runInAction(() => this.localCart = cart)
-                }
-              )
+        .then(
+          (cart) => {
+            runInAction(() => this.localCart = cart)
+          }
+        )
       },
 
       1000
@@ -28,6 +28,10 @@ class CartStore {
     return this.localCart.find(
       item => productID === item._id
     )
+  }
+
+  getQty(productID: string): number {
+    return this.getItem(productID)?.qty ?? 0
   }
 
   @computed
@@ -69,57 +73,75 @@ class CartStore {
     return amountPrice
   }
 
-  @action
-  addProduct(product: Product, qty: number) {
-    cart.addProduct(product._id, qty)
-          .then(
-            (status) => {
-              if (status) {
-                runInAction(
-                  () => this.localCart.push({ ...product, qty })
-                )
-              }
-            }
-          )
+  @action.bound
+  clearCart() {
+    this.localCart = []
   }
 
-  @action
-  remProduct(productID: string) {
-    cart.remProduct(productID)
-          .then(
-            (status) => {
-              if (status) {
-                runInAction(
-                  () => this.localCart = this.localCart.filter(
-                    item => item._id != productID
-                  )
-                )
-              }
-            }
-          )
+  @action.bound
+  async addProduct(product: Product, qty: number) {
+    const status = await cart.addProduct(product._id, qty)
+
+    if (status) {
+      runInAction(
+        () => this.localCart.push({ ...product, qty })
+      )
+    }
   }
 
-  @action
-  incProductQty(productID: string) {
+  @action.bound
+  async remProduct(productID: string) {
+    let item = this.getItem(productID)
+
+    if (item) {
+      this.localCart = this.localCart.filter(
+        item => item._id != productID
+      )
+
+      try {
+        const status = await cart.remProduct(productID)
+        if (!status) runInAction(() => this.localCart.push(item))
+
+      } catch (err) {
+        console.log(err)
+        runInAction(() => this.localCart.push(item))
+      }
+    }
+  }
+
+  @action.bound
+  async incProductQty(productID: string) {
     let item = this.getItem(productID)
 
     if (item) {
       item.qty++
-      cart.updateProductQty(productID, item.qty)
-            .then((status) => status ? null : runInAction(() => item.qty--))
-            .catch(() => runInAction(() => item.qty--))
+
+      try {
+        const status = await cart.updateProductQty(productID, item.qty)
+        !status ? runInAction(() => item.qty--) : null
+
+      } catch (err) {
+        console.log(err)
+        runInAction(() => item.qty--)
+      }
     }
   }
 
-  @action
-  decProductQty(productID: string) {
+  @action.bound
+  async decProductQty(productID: string) {
     let item = this.getItem(productID)
 
     if (item) {
       item.qty--
-      cart.updateProductQty(productID, item.qty)
-            .then((status) => status ? null : runInAction(() => item.qty++))
-            .catch(() => runInAction(() => item.qty++))
+
+      try {
+        const status = await cart.updateProductQty(productID, item.qty)
+        !status ? runInAction(() => item.qty++) : null
+
+      } catch (err) {
+        console.log(err)
+        runInAction(() => item.qty++)
+      }
     }
   }
 }

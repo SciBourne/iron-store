@@ -1,11 +1,14 @@
 import { createContext } from "react"
+
 import { CartStore } from "../stores"
+import { OrderStore } from "../stores"
 
 
 
 
 const stores = {
-  cart: new CartStore()
+  cart: new CartStore(),
+  orders: new OrderStore()
 }
 
 

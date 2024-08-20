@@ -25,6 +25,12 @@ h2 {
 }
 
 
+h3 {
+  font-size: var(--font-size-sx);
+  font-weight: 400;
+}
+
+
 button {
   font-family: inherit;
   border: 0;

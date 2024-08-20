@@ -1,8 +1,13 @@
-import { Link } from "react-router-dom"
+import { Link, useLocation } from "react-router-dom"
+import { useContext } from "react"
+import { observer } from "mobx-react"
+
 import { ROOT_PRODUCT_IMAGE as ROOT_IMG } from "../../config"
-import { Product } from "../../models"
+import { CartItemDetails, Product } from "../../models"
+import { Context } from "../../context"
 
 import { PriceBox } from ".."
+import { handleRemove } from "../handlers/product-card"
 
 
 
@@ -106,37 +111,58 @@ function ProductBalance(props: productBalanceProps): JSX.Element {
 
 
 
-interface productInfo {
-  vendor: string
-  model: string
-  shortDescription: string
-  balance: number
-}
 
-function ProductInfo(props: productInfo): JSX.Element {
+const RemoveButton = observer(
+  (props: { productID: string }): JSX.Element | null => {
+    const stores = useContext(Context)
+
+    if (stores && stores.cart) {
+      const cart = stores.cart
+
+      return (
+        <button className="remove-button" onClick={ handleRemove(props.productID, cart) }>
+          <img src="/img/cart-remove.svg" alt="remove" />
+          <span>Удалить</span>
+        </button>
+      )
+
+    } else {
+      return null
+    }
+  }
+)
+
+
+
+
+function ProductInfo(props: Product | CartItemDetails): JSX.Element {
+  const location: string = useLocation().pathname
+
   return (
     <div className="info">
       <ProductLabel vendor={ props.vendor } model={ props.model } />
       <ProductDescription style="short" content={ props.shortDescription } />
       <ProductBalance balance={ props.balance } />
+
+      {
+        location == "/cart" && <RemoveButton productID={ props._id } />
+      }
+
     </div>
   )
 }
 
 
 
-function ProductCard(props: Product): JSX.Element {
+
+function ProductCard(props: Product | CartItemDetails): JSX.Element {
   return (
     <article className="product">
       <ProductImage id={ props._id }
                     category={ props.category }
                     isLink={ true } />
 
-      <ProductInfo  vendor={ props.vendor }
-                    model={ props.model }
-                    balance={ props.balance }
-                    shortDescription={ props.shortDescription } />
-
+      <ProductInfo { ...props } />
       <PriceBox product={ props } />
     </article>
   )

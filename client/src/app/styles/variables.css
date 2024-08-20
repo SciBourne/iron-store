@@ -7,9 +7,11 @@
   --font-color-active: #83CAF6;
   --font-color-disabled: #a1d32c;
   --font-color-cart-info: #FF7222;
+  --font-color-dangerous: #ff0000;
 
   --bg-color-main: #FFFFFF;
   --bg-color-dark: linear-gradient(0deg, #343434 0%, #505050 100%);
+  --bg-color-soft-dark: linear-gradient(0deg, #616161 0%, #bdbdbd 100%);
   --bg-color-middle: linear-gradient(0deg, #D9D9D9 0%, #F9F9F9 100%);
 
   --button-color-store: linear-gradient(180deg, #FFA132 0%, #99601E 100%);
@@ -19,6 +21,7 @@
   --button-color-store--only-content: orange;
 
   --border-color: #e7e7e7;
+  --border-color-dark: #b4b4b4;
 
   /* Shadows */
 
@@ -28,6 +31,7 @@
   /* Font size */
 
   --font-size-s: 1vw;
+  --font-size-sx: 1.25vw;
   --font-size-m: 1.5vw;
   --font-size-l: 2vw;
 

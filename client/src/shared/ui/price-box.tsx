@@ -1,7 +1,8 @@
+import { useContext, useEffect, useState } from "react"
+import { useLocation } from "react-router-dom"
 import { observer } from "mobx-react"
 
-import { handleClickButton } from "../handlers/price-box"
-import { useContext } from "react"
+import { handleClickButton, handleQuantifier } from "../handlers/price-box"
 import { Context } from "../../context"
 import { Product } from "../../models"
 
@@ -55,8 +56,78 @@ const ButtonStore = observer(
 
 
 
+const Quantifier = observer(
+  (props: {product: Product}): JSX.Element | null => {
+    const stores = useContext(Context)
+
+    if (stores && stores.cart) {
+      const [leftDisabled, setLeftDisabled] = useState(true)
+      const [rightDisabled, setRightDisabled] = useState(false)
+
+      const cart = stores.cart
+
+      useEffect(
+        () => {
+          cart.getQty(props.product._id) <= 1
+              ? setLeftDisabled(true)
+              : setLeftDisabled(false)
+
+          cart.getQty(props.product._id) >= props.product.balance
+              ? setRightDisabled(true)
+              : setRightDisabled(false)
+        },
+
+        [cart.getQty(props.product._id)]
+      )
+
+      return (
+        <div className="quantifier">
+          <button type="button"
+                  disabled={ leftDisabled }
+
+                  onClick={
+                    handleQuantifier(
+                      "dec",
+                      props.product._id,
+                      cart,
+                      [setLeftDisabled, setRightDisabled]
+                    )
+          }>
+            <img src="/img/quantifier-minus.svg" alt="minus" />
+          </button>
+
+          <span className="qty">
+            { cart.getQty(props.product._id) }
+          </span>
+
+          <button type="button"
+                  disabled={ rightDisabled }
+
+                  onClick={
+                    handleQuantifier(
+                      "inc",
+                      props.product._id,
+                      cart,
+                      [setLeftDisabled, setRightDisabled]
+                    )
+          }>
+            <img src="/img/quantifier-plus.svg" alt="plus" />
+          </button>
+        </div>
+      )
+
+    } else {
+      return null
+    }
+  }
+)
+
+
+
+
 function PriceBox(props: { product: Product, theme?: string }): JSX.Element {
   const theme: string = props.theme ? "-" + props.theme : ""
+  const location: string = useLocation().pathname
 
   let containerStyle: string = "price-box" + theme
   let payloadContent: JSX.Element
@@ -98,7 +169,13 @@ function PriceBox(props: { product: Product, theme?: string }): JSX.Element {
       <div className="payload">
         { payloadContent }
       </div>
-      <ButtonStore product={ props.product } />
+
+      {
+        location != "/cart"
+            ? <ButtonStore product={ props.product } />
+            : <Quantifier product={ props.product } />
+      }
+
     </form>
   )
 }

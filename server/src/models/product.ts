@@ -1,11 +1,11 @@
 import { ObjectId } from "mongodb"
-import Category from "./category"
+import { CategoryName } from "./category"
 
 
 
 interface Product {
   _id: ObjectId
-  category: Category
+  category: CategoryName
   vendor: string
   model: string
   price: number

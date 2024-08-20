@@ -71,3 +71,45 @@
     opacity: 0;
   }
 }
+
+
+.quantifier {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  justify-content: space-between;
+  gap: 0.6vw;
+}
+
+
+.quantifier > .qty {
+  font-weight: 400;
+  color: var(--font-color-active);
+}
+
+
+.quantifier > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--bg-color-soft-dark);
+  color: var(--font-color-bright);
+
+  cursor: pointer;
+  border-radius: 50%;
+
+  width: 1.8vw;
+  height: 1.8vw;
+
+  > img {
+    width: 80%;
+    height: auto;
+  }
+
+  &:disabled {
+    background: var(--bg-color-middle);
+    cursor: not-allowed
+  }
+}

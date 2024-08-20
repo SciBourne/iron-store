@@ -1,4 +1,7 @@
 import { CartStore } from "./cart"
+import { OrderStore } from "./orders"
 
 
-export { CartStore }
+
+
+export { CartStore, OrderStore }

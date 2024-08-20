@@ -8,6 +8,7 @@ import ProductsPage from "../pages/products"
 import ProductsList from "../widgets/product-list"
 import { PageNotFound } from "../widgets/errors"
 import ProductDetails from "../widgets/product-details"
+import CartPage from "../pages/cart"
 
 
 
@@ -50,6 +51,11 @@ const Router = createBrowserRouter(
               ]
             }
           ]
+        },
+
+        {
+          path: "/cart",
+          element: <CartPage />,
         }
       ]
     }
