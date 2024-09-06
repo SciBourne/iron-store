@@ -1,9 +1,10 @@
 .input-field {
   display: flex;
   flex-direction: column;
+  gap: 0.5vw;
 
   font-weight: 400;
-  gap: 0.5vw;
+  width: 100%;
 }
 
 

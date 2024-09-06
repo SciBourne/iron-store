@@ -1,3 +1,4 @@
+import { API_POINT, API_VERSION } from "../../../config/net"
 import { expiresAfter } from "../../lib"
 import { generateSecretKey } from "./generators"
 
@@ -36,6 +37,13 @@ class CookieOptions {
 }
 
 
+const PROTECTED_ROUTES = [
+  API_POINT + API_VERSION + "/profile",
+  API_POINT + API_VERSION + "/orders",
+]
+
+
+
 
 
 export {
@@ -49,6 +57,8 @@ export {
 
   SRV_SIGN_LEN,
   USR_TOKEN_LEN,
+
+  PROTECTED_ROUTES,
 
   CookieOptions
 }

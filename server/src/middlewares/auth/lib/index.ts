@@ -11,6 +11,8 @@ import {
   SRV_SIGN_LEN,
   USR_TOKEN_LEN,
 
+  PROTECTED_ROUTES,
+
   CookieOptions
 
 } from "./config"
@@ -47,6 +49,8 @@ export {
 
   SRV_SIGN_LEN,
   USR_TOKEN_LEN,
+
+  PROTECTED_ROUTES,
 
   CookieOptions,
 

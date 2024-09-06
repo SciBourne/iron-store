@@ -171,9 +171,11 @@ function PriceBox(props: { product: Product, theme?: string }): JSX.Element {
       </div>
 
       {
-        location != "/cart"
-            ? <ButtonStore product={ props.product } />
-            : <Quantifier product={ props.product } />
+        location == "/cart"
+            ? <Quantifier product={ props.product } />
+            : location == "/profile"
+                  ? null
+                  : <ButtonStore product={ props.product } />
       }
 
     </form>

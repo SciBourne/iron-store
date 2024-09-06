@@ -6,7 +6,7 @@ import { getServerStatus } from "../../controllers"
 
 const router = Router()
 
-router.route("/").head(getServerStatus)
+router.route( "/" ).head(getServerStatus)
 
 
 

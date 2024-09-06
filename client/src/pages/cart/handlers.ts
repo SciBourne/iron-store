@@ -32,7 +32,7 @@ function handleCartSubmit(cart: CartStore,
     try {
       const status = await orders.createOrder(formData)
 
-      if (status) cart.clearCart()
+      if (status) cart.clear()
 
     } catch (err) {
       console.log(err)

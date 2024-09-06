@@ -11,41 +11,59 @@ enum UserGroup {
 }
 
 
+interface UserData {
+  firstName: string
+  secondName: string
+  patronymic: string
+
+  email: string
+  phone: number
+
+  region: string
+  city: string
+  street: string
+  house: number
+  apartment?: number
+}
+
+
+interface UserAuth {
+  token: string
+  expireIn: Timestamp
+
+  hash?: string
+  salt?: string
+}
+
+
 interface User {
   _id?: ObjectId
   group: UserGroup
 
-  auth: {
-    token: string
-    expireIn: Timestamp
-  }
+  auth: UserAuth
+  data?: UserData
+}
 
-  secret?: {
-    hash: string
-    salt: string
-  }
 
-  email?: string
+interface UserRegData extends UserData {
+  password: string
+}
 
-  name?: {
-    first: string
-    second: string
-    patronymic: string
-  }
 
-  address?: {
-    region: string
-    city: string
-
-    street: string
-    house: number
-    flat: number | null
-
-    privateHouse: boolean
-  }
+interface UserAccess {
+  userID: ObjectId
+  accessToken: string
+  refreshToken: string
 }
 
 
 
 
-export { User, UserGroup }
+export {
+  User,
+  UserAuth,
+  UserData,
+  UserRegData,
+  UserAccess,
+  UserGroup
+}

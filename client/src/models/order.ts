@@ -11,6 +11,14 @@ enum OrderStatus {
 }
 
 
+enum OrderStatusString {
+  "В обработке" = 0,
+  "Отменён" = 1,
+  "В доставке" = 2,
+  "Завешён" = 3
+}
+
+
 interface OrderRequest {
   firstName: string
   secondName: string
@@ -32,11 +40,17 @@ interface OrderRequest {
 
 interface Order extends OrderRequest {
   _id: string
-  date: Date
-  status: OrderStatus
+  date: Date | string
+  status: OrderStatus | number
 }
 
 
 
 
-export { type Order, type OrderRequest, OrderStatus }
+export {
+  type Order,
+  type OrderRequest,
+
+  OrderStatus,
+  OrderStatusString
+}

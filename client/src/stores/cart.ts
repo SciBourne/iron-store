@@ -74,7 +74,7 @@ class CartStore {
   }
 
   @action.bound
-  clearCart() {
+  clear() {
     this.localCart = []
   }
 

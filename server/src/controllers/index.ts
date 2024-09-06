@@ -18,6 +18,14 @@ import {
   cancelOrder
 } from "./orders"
 
+import {
+  login,
+  logout,
+  register,
+  getUserData,
+  updateUserData
+} from "./users"
+
 
 
 
@@ -37,5 +45,11 @@ export {
 
   getOrderHistory,
   createOrder,
-  cancelOrder
+  cancelOrder,
+
+  login,
+  logout,
+  register,
+  getUserData,
+  updateUserData
 }

@@ -81,6 +81,11 @@ class OrderStore {
       return false
     }
   }
+
+  @action
+  clear() {
+    this.orderHistory = []
+  }
 }
 
 

@@ -111,6 +111,16 @@ function ProductBalance(props: productBalanceProps): JSX.Element {
 
 
 
+function ItemQty(props: { qty: number }): JSX.Element {
+  return (
+    <p className="item-qty">
+      Количество: <span className="data">{ props.qty }</span>
+    </p>
+  )
+}
+
+
+
 
 const RemoveButton = observer(
   (props: { productID: string }): JSX.Element | null => {
@@ -142,7 +152,12 @@ function ProductInfo(props: Product | CartItemDetails): JSX.Element {
     <div className="info">
       <ProductLabel vendor={ props.vendor } model={ props.model } />
       <ProductDescription style="short" content={ props.shortDescription } />
-      <ProductBalance balance={ props.balance } />
+
+      {
+        location == "/profile"
+            ? "qty" in props && <ItemQty qty={ props.qty } />
+            : <ProductBalance balance={ props.balance } />
+      }
 
       {
         location == "/cart" && <RemoveButton productID={ props._id } />

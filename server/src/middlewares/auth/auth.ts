@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from "express"
+import * as jwt from "jsonwebtoken"
 
 import {
 
@@ -7,9 +8,11 @@ import {
   AccessData,
   TokenName,
   CookieOptions,
-  createGuest
+  createGuest,
+  PROTECTED_ROUTES
 
 } from "./lib"
+import { UserGroup } from "../../models"
 
 
 
@@ -37,7 +40,24 @@ function authUser(req: Request, res: Response, next: NextFunction) {
         )
 
     } else {
-      return next()
+      if (PROTECTED_ROUTES.includes(req.path)) {
+        const decodedToken = jwt.decode(
+          req.cookies.ACCESS_TOKEN,
+          { json: true }
+        )
+
+        if (decodedToken?.group == UserGroup.USERS) {
+          console.log("AUTH: USER")
+          return next()
+
+        } else {
+          console.log("AUTH: GUEST")
+          return res.redirect("/login")
+        }
+
+      } else {
+        return next()
+      }
     }
   }
 

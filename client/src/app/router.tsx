@@ -6,9 +6,11 @@ import Footer from "../widgets/footer"
 
 import ProductsPage from "../pages/products"
 import ProductsList from "../widgets/product-list"
-import { PageNotFound } from "../widgets/errors"
 import ProductDetails from "../widgets/product-details"
 import CartPage from "../pages/cart"
+import { LoginPage, ProfilePage, RegPage } from "../pages/profile"
+
+import { PageNotFound } from "../widgets/errors"
 
 
 
@@ -56,6 +58,21 @@ const Router = createBrowserRouter(
         {
           path: "/cart",
           element: <CartPage />,
+        },
+
+        {
+          path: "/login",
+          element: <LoginPage />
+        },
+
+        {
+          path: "/reg",
+          element: <RegPage />
+        },
+
+        {
+          path: "/profile",
+          element: <ProfilePage />
         }
       ]
     }
