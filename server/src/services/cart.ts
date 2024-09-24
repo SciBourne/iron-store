@@ -177,7 +177,10 @@ async function remFromCart(userID: string, productID: string): Promise<boolean> 
 
 
 
-async function updateQty(userID: string, productID: string, newQty: number): Promise<boolean> {
+async function updateQty(userID: string,
+                         productID: string,
+                         newQty: number): Promise<boolean> {
+
   const findParams = {
     _id: new ObjectId(userID)
   }

@@ -16,7 +16,9 @@ const categories: CategoryName[] = Object.values(CategoryName)
 
 
 
-async function getProduct(category: CategoryName, id: string): Promise<Product | null> {
+async function getProduct(category: CategoryName,
+                          id: string): Promise<Product | null> {
+
   return db.get().collection<Product>("products")
                     .findOne<Product>(
                       {
