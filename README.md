@@ -3,22 +3,14 @@
 
 <br>
 
-Стек:
-* TypeScript
+## Клиент (TyypeScript)
+
 * React
-* Node.js
+* MobX
+
+<br>
+
+## Сервер (TypeScript)
+
+* Express
 * MongoDB
-
-<br>
-
-## Клиент
-
-* pages
-* widgets
-* components
-
-<br>
-
-## Сервер
-
-Not emplemented...
