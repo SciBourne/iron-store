@@ -3,7 +3,7 @@
 
 <br>
 
-## Клиент (TyypeScript)
+## Клиент (TypeScript)
 
 * React
 * MobX
